@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Http\Requests\StoreCategoryRequest;
 class CategoryController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category= Category::paginate(5);
+        return view('admin.pages.category.list',compact('category'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.category.add');
     }
 
     /**
@@ -33,9 +34,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+       Category::create([
+        'name' => $request->name,
+        'slug' => utf8tourl($request->name),
+        'status' => $request->status
+       ]);
+
+       return redirect()->route('category.index');
     }
 
     /**
