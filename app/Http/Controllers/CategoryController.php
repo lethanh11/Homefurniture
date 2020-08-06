@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->$categoryRepository = $categoryRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category= Category::paginate(5);
+        $category= $this->categoryRepository->all();
+        $category = $category->paginate(5);
         return view('admin.pages.category.list',compact('category'));
     }
 
@@ -36,11 +44,13 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-       Category::create([
-        'name' => $request->name,
-        'slug' => utf8tourl($request->name),
-        'status' => $request->status
-       ]);
+    //    Category::create([
+    //     'name' => $request->name,
+    //     'slug' => utf8tourl($request->name),
+    //     'status' => $request->status
+    //    ]);
+
+    $this->categoryRepository->create();
 
        return redirect()->route('category.index');
     }
