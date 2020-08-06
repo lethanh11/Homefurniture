@@ -6,96 +6,81 @@ use App\Http\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
+use Darryldecode\Cart\Validators\Validator;
+
 class CategoryController extends Controller
 {
     protected $categoryRepository;
 
     public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->$categoryRepository = $categoryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $category= $this->categoryRepository->all();
-        $category = $category->paginate(5);
+        //
         return view('admin.pages.category.list',compact('category'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('admin.pages.category.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreCategoryRequest $request)
     {
-    //    Category::create([
-    //     'name' => $request->name,
-    //     'slug' => utf8tourl($request->name),
-    //     'status' => $request->status
-    //    ]);
 
-    $this->categoryRepository->create();
+         $this->categoryRepository->create($request);
 
        return redirect()->route('category.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
+
+    public function edit($id)
     {
-        //
+        $category = $this->categoryRepository->edit($id);
+
+        return response()->json($category,200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),
+        [
+            'name' => 'required|min:2|max:255'
+        ],
+        [
+            'required' => 'Tên danh mục sản phẩm không được để trống',
+            'min' => 'Tên danh mục sản phẩm phải đủ từ 2-255 ký tự',
+            'max' => 'Tên danh mục sản phẩm phải đủ từ 2-255 ký tự',
+        ]
+    );
+    if($validator->fails()){
+        return response()->json(['error' => 'true','message' => $validator->errors()], 200);
+    }
+        $category = Category::findOrFail($id);
+        $category->update(
+        [
+        'name' => $request->name,
+        'slug' => utf8tourl($request->name),
+        'status' => $request->status
+        ]
+        );
+        return response()->json(['success'=>'Sửa thành công','category'=>$category]);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
+
+    public function destroy($id)
     {
         //
     }

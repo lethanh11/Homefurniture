@@ -18,8 +18,8 @@
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status">
-                        <option value="1">Hiển thị</option>
-                        <option value="0">Không hiển thị</option>
+                        <option value="1">Hot</option>
+                        <option value="0">Normal</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-success">Submit Button</button>
