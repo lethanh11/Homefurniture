@@ -15,7 +15,7 @@ class CreateProductTypesTable extends Migration
     {
         Schema::create('producttype', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idCategory');//Liên Kết với bản categories
+            $table->integer('Category_id');//Liên Kết với bản categories
             $table->string('name');
             $table->string('slug');
             $table->integer('status')->default(1);

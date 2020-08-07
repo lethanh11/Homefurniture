@@ -13,6 +13,6 @@ class Category extends Model
     ];
 
     public function productType(){
-        return $this->hasMany('App\Models\ProductType','idCategory','id');
+        return $this->hasMany('App\Models\ProductType','Category_id','id');
     }
 }

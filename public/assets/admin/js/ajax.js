@@ -57,4 +57,21 @@ $(document).ready(function(){
             })
         })
     });
+    //Xóa Category
+    $(`.delete`).click(function(){
+        // $(`.error`).hide();
+        let id = $(this).data('id');
+        $(`.del`).click(function(){
+            $.ajax({
+                url : 'admin/category/'+id,
+                dataType : 'json',
+                method : 'DELETE',
+                success : function(result){
+                    toastr.success(result.success, 'Thông Báo', {timeOut: 5000});
+                    $(`#delete`).modal('hide');
+                    $(`button[data-id=${id}]`).closest('tr').hide();
+                }
+            });
+        });
+    });
 })

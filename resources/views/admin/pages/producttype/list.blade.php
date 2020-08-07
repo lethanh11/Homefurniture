@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Danh Sách Danh Mục Sản Phẩm')
+@section('title', 'Danh Sách Loại Sản Phẩm')
 
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Category</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Loại sản phẩm</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -15,16 +15,18 @@
                             <th>STT</th>
                             <th>Name</th>
                             <th>Slug</th>
+                            <th>Category</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($category as $key => $value)
+                        @foreach ($producttype as $key => $value)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td id="p{{$value->id}}">{{ $value->name }}</td>
                                 <td id='slug{{$value->id}}'>{{ $value->slug }}</td>
+                                <td id="loai{{$value->id}}">{{ $value->Category->name}}</td>
                                 <td id='b{{$value->id}}'>
                                     @if ($value->status == 1)
                                         {{ 'Hot' }}
@@ -33,10 +35,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary edit" title="{{ 'Sửa ' . $value->name }}"
+                                    <button class="btn btn-primary editProducttype" title="{{ 'Sửa ' . $value->name }}"
                                         data-toggle="modal" data-target="#edit" type="button" data-id={{ $value->id }}><i
                                             class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger delete" title="{{ 'Xóa ' . $value->name }}"
+                                    <button class="btn btn-danger deleteProducttype" title="{{ 'Xóa ' . $value->name }}"
                                         data-toggle="modal" data-target="#delete" type="button" data-id={{ $value->id }}><i
                                             class="fas fa-trash-alt"></i></button>
                                 </td>

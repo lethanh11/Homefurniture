@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ Route::get('/admin', function () {
 
 Route::group(['prefix' =>'admin'],function(){
     Route::resource('category', 'CategoryController');
+    Route::resource('producttype', 'ProductTypeController');
 });
 
 

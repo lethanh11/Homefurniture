@@ -9,10 +9,10 @@ class Customer extends Model
     protected $table = 'customer';
 
     protected $fillable = [
-        'idUser','address','phone',
+        'User_id','address','phone',
     ];
 
     public function User(){
-        return $this->belongsTo('App\Models\User','idUser','id');
+        return $this->belongsTo('App\Models\User','User_id','id');
     }
 }

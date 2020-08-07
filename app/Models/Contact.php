@@ -9,10 +9,10 @@ class Contact extends Model
     protected $table = 'contact';
 
     protected $fillable = [
-        'idUser','message',
+        'User_id','message',
     ];
 
     public function User(){
-        return $this->belongsTo('App\Models\User','idUser','id');
+        return $this->belongsTo('App\Models\User','User_id','id');
     }
 }

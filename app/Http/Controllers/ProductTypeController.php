@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductType;
+
 use Illuminate\Http\Request;
+use App\Models\ProductType;
 
 class ProductTypeController extends Controller
 {
 
     public function index()
     {
-        //
+        $producttype = ProductType::all();
+        return view('admin.pages.producttype.list',compact('producttype'));
     }
 
 
