@@ -24,23 +24,19 @@
                         @foreach ($producttype as $key => $value)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td id="p{{$value->id}}">{{ $value->name }}</td>
-                                <td id='slug{{$value->id}}'>{{ $value->slug }}</td>
-                                <td id="loai{{$value->id}}">{{ $value->Category->name}}</td>
-                                <td id='b{{$value->id}}'>
+                                <td id="ploai{{ $value->id }}">{{ $value->name }}</td>
+                                <td id='slugloai{{ $value->id }}'>{{ $value->slug }}</td>
+                                <td id="loai{{ $value->id }}">{{ $value->Category->name }}</td>
+                                <td id='bloai{{ $value->id }}'>
                                     @if ($value->status == 1)
-                                        {{ 'Hot' }}
+                                        {{ 'Hiển Thị' }}
                                     @else
-                                        {{ 'Normal' }}
+                                        {{ 'Ẩn' }}
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary editProducttype" title="{{ 'Sửa ' . $value->name }}"
-                                        data-toggle="modal" data-target="#edit" type="button" data-id={{ $value->id }}><i
-                                            class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger deleteProducttype" title="{{ 'Xóa ' . $value->name }}"
-                                        data-toggle="modal" data-target="#delete" type="button" data-id={{ $value->id }}><i
-                                            class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-primary editProducttype" title="{{ "Sửa ".$value->name }}" data-toggle="modal" data-target="#edit" type="button" data-id="{{ $value->id }}"><i class="fas fa-edit"></i></button>
+		                        	<button class="btn btn-danger deleteProducttype" title="{{ "Xóa ".$value->name }}" data-toggle="modal" data-target="#delete" type="button" data-id="{{ $value->id }}"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -62,25 +58,30 @@
                 <div class="modal-body">
                     <div class="row" style="margin: 5px">
                         <div class="col-lg-12">
-                            <form role="form">
+                            <form role="form" >
+                                @csrf
                                 <fieldset class="form-group">
                                     <label>Name</label>
-                                    <input class="form-control name" name="name" placeholder="Nhập Tên Danh Mục ">
+                                    <input class="form-control name" name="name" placeholder="Nhập Tên loại sản phẩm ">
+                                        <div class="alert alert-danger error" style="color: red; font-size: 1rem;"></div>
                                 </fieldset>
-                                <span class="error" style="color: red; font-size: 1rem" ></span>
-                                {{-- <input type="hidden" class="form-control slug" name="slug" placeholder=""> --}}
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control Category_id" name="Category_id">
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select class="form-control status" name="status">
-                                        <option value="1" class="hot">Hot</option>
-                                        <option value="0" class="normal">Normal</option>
+                                        <option value="1" class="hot">Hiển Thị</option>
+                                        <option value="0" class="normal">Ẩn</option>
                                     </select>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success update">Update</button>
+                        <button type="button" class="btn btn-success updateProductType">Update</button>
                         <button type="reset" class="btn btn-primary">Làm Lại</button>
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     </div>
@@ -88,23 +89,22 @@
             </div>
         </div>
     </div>
-        <!-- delete Modal-->
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa ?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="margin-left: 183px;">
-                        <button type="button" class="btn btn-success del">Có</button>
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>
-                        <div>
-                        </div>
+    <!-- delete Modal-->
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="margin-left: 183px;">
+                    <button type="button" class="btn btn-success delProductType">Có</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>
+                    <div>
                     </div>
                 </div>
-    </div>
-@endsection
+            </div>
+        </div>
+    @endsection

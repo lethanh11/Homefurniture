@@ -1,28 +1,39 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Thêm Danh Mục Sản Phẩm')
+@section('title', 'Thêm  Loại Sản Phẩm')
 
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Category</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Loại Sản Phẩm</h6>
     </div>
     <div class="row" style="margin: 5px">
         <div class="col-lg-6">
-        <form role="form" action="{{route('category.store')}}" method="post">
+        <form role="form" action="{{route('producttype.store')}}" method="post">
             @csrf
                 <fieldset class="form-group">
                     <label>Name</label>
-                    <input class="form-control" name="name" placeholder="Nhập Tên Danh Mục ">
+                    <input class="form-control"  name="name" placeholder="Nhập Tên loại sản phẩm ">
+                   @if($errors->has('name'))
+                <div class="alert alert-danger">{{$errors->first('name')}}</div>
+                @endif
                 </fieldset>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" name="Category_id">
+                        @foreach($category as $cate)
+                    <option value="{{$cate->id}}">{{$cate->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status">
-                        <option value="1">Hot</option>
-                        <option value="0">Normal</option>
+                        <option value="1">Hiển Thị</option>
+                        <option value="0">Ẩn</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success submit" data-target="#submit">Submit Button</button>
+                <button type="submit" class="btn btn-success submit" data-target="#submit">Thêm</button>
             </form>
         </div>
     </div>

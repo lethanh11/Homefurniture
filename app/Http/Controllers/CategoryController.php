@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
          $this->categoryRepository->create($request);
 
-       return redirect()->route('category.index');
+       return redirect()->route('category.index')->with('thongbao','Thêm thành công');
     }
 
     public function show($id)

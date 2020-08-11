@@ -27,9 +27,9 @@
                                 <td id='slug{{$value->id}}'>{{ $value->slug }}</td>
                                 <td id='b{{$value->id}}'>
                                     @if ($value->status == 1)
-                                        {{ 'Hot' }}
+                                        {{ 'Hiển Thị' }}
                                     @else
-                                        {{ 'Normal' }}
+                                        {{ 'Ẩn' }}
                                     @endif
                                 </td>
                                 <td>
@@ -70,8 +70,8 @@
                                 <div class="form-group">
                                     <label>Status</label>
                                     <select class="form-control status" name="status">
-                                        <option value="1" class="hot">Hot</option>
-                                        <option value="0" class="normal">Normal</option>
+                                        <option value="1" class="hot">Hiển thị</option>
+                                        <option value="0" class="normal">Ẩn</option>
                                     </select>
                                 </div>
                             </form>

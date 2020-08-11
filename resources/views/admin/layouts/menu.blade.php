@@ -35,4 +35,40 @@
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#producttype" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>ProductType</span>
+        </a>
+        <div id="producttype" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Loại Sản Phẩm</h6>
+            <a class="collapse-item" href="{{ route('producttype.index')}}">Danh Sách</a>
+            <a class="collapse-item" href="{{ route('producttype.create')}}">Thêm Mới</a>
+            </div>
+        </div>
+    </li>
+
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Sản Phẩm
+    </div>
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#product" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Product</span>
+        </a>
+        <div id="product" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Quản Lý Sản Phẩm</h6>
+            <a class="collapse-item" href="{{ route('product.index')}}">Danh Sách</a>
+            <a class="collapse-item" href="{{ route('product.create')}}">Thêm Mới</a>
+            </div>
+        </div>
+    </li>
 </ul>
+
