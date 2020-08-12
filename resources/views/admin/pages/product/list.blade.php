@@ -29,15 +29,15 @@
                         @foreach ($product as $key => $value)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>{!! $value->description !!}</td>
-                                <td><img src="img/upload/product/{{ $value->image }}" width="100" height="100" alt=""></td>
-                                <td>{{ $value->Category->name }}</td>
-                                <td>{{ $value->ProductType->name }}</td>
-                                <td>{{ $value->quantity }}</td>
-                                <td>{{ $value->promotional }}%</td>
-                                <td>{{ number_format($value->price) }} VNĐ</td>
-                                <td>
+                                <td id="product{{ $value->id }}">{{ $value->name }}</td>
+                                <td id="proDescrip{{ $value->id }}">{!! $value->description !!}</td>
+                                <td id="proImage{{ $value->id }}"><img src="img/upload/product/{{ $value->image }}" width="100" height="100" alt=""></td>
+                                <td id="proDanhmuc{{ $value->id }}">{{ $value->Category->name }}</td>
+                                <td id="proLoai{{ $value->id }}">{{ $value->ProductType->name }}</td>
+                                <td id="proQuantity{{ $value->id }}">{{ $value->quantity }}</td>
+                                <td id="Promotional{{ $value->id }}">{{ number_format($value->promotional)}}VNĐ</td>
+                                <td id="proPrice{{ $value->id }}">{{ number_format($value->price) }} VNĐ</td>
+                                <td id="prostatus{{ $value->id }}">
                                     @if ($value->status == 1)
                                         {{ 'Hiển Thị' }}
                                     @else
@@ -122,6 +122,7 @@
                                     </select>
                                 </div>
                                 <input type="submit" class="btn btn-success submit" value="Sửa">
+                                {{-- <button type="button" class="btn btn-success updateProductType">Update</button> --}}
                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                             </form>
                         </div>

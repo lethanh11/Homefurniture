@@ -250,33 +250,40 @@ $(document).ready(function () {
                         if(data.message.name){
                             $(`.errorName`).show();
                             $(`.errorName`).text(data.message.name[0]);
+                            $(`.name`).val('');
                         }
                         if(data.message.quantity){
                             $(`.errorQuantity`).show();
                             $(`.errorQuantity`).text(data.message.quantity[0]);
+                            $(`.quantity`).val('');
                         }
                         if(data.message.price){
                             $(`.errorPrice`).show();
                             $(`.errorPrice`).text(data.message.price[0]);
+                            $(`.price`).val('');
                         }
                         if(data.message.promotional){
                             $(`.errorPromotional`).show();
                             $(`.errorPromotional`).text(data.message.promotional[0]);
+                            $(`.promotional`).val('');
                         }
                         if(data.message.description){
                             $(`.errorDescription`).show();
                             $(`.errorDescription`).text(data.message.description[0]);
+                            $(`.imageThum`).val('');
                         }
                     } else {
                         toastr.success(data.result, 'Thông Báo', { timeOut: 5000 });
                         $('#edit').modal('hide');
-                        $('#ploai' + id).text(data.category['name']);
+                        $('#product' + id).text(data.category['name']);
+                        $('#proQuantity' + id).text(data.category['quantity']);
+                        $('#proImage' + id).text(data.category['image']);
+                        $('#proDescrip' + id).text(data.category['description']);
                         if (status == 1) {
-                            $('#bloai' + id).text('Hiển Thị');
+                            $('#prostatus' + id).text('Hiển Thị');
                         } else {
-                            $('#bloai' + id).text('Ẩn');
+                            $('#prostatus' + id).text('Ẩn');
                         }
-                        $('#slugloai' + id).text(data.category['slug']);
                         $.each(data.category, function (i, v) {
                             if (Category_id == v.id) {
                                 $(`#loai${id}`).html(v.name);

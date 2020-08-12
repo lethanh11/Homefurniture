@@ -83,7 +83,7 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'price' => 'required|numeric',
             'promotional' => 'numeric',
-            'image' => 'required|image',
+            'image' => 'image',
         ],
         [
             'required' => ':attribute không được bỏ trống',

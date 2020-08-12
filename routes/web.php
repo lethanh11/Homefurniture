@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('admin.pages.index');
+Route::get('/',function(){
+    return view('client.pages.index');
 });
 Route::get('getproducttype','AjaxController@getProductType');
 Route::group(['prefix' =>'admin'],function(){
@@ -24,5 +25,7 @@ Route::group(['prefix' =>'admin'],function(){
     Route::resource('product', 'ProductController');
     Route::post('updatePro/{id}','ProductController@update');
 });
-
+Route::post('resgister','HomeController@register')->name('register');
+Route::get('logout','HomeController@logout');
+Route::post('updatepass','HomeController@updatepass');
 
