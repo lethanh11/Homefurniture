@@ -27,5 +27,5 @@ Route::group(['prefix' =>'admin'],function(){
 });
 Route::post('resgister','HomeController@register')->name('register');
 Route::get('logout','HomeController@logout');
-Route::post('updatepass','HomeController@updatepass');
+Route::post('updatepass','HomeController@updatePass');
 
